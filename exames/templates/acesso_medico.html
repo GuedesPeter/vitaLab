@@ -19,13 +19,19 @@
               <th>Exame</th>
               
             </tr>
-						<tr class="linha-tabela">
-	            <td>Nome</td>
-	            
-	            
-	               <td>Em análise</td>
-	            
-	        </tr>
+            {% for pedido in pedidos %}
+                {% for exame in pedido.exames.all %}
+                    <tr class="linha-tabela">
+                        <td>{{exame.exame.nome}}</td>
+                        
+                        {% if exame.resultado %}
+                            <td><a style="text-decoration: none;" class="btn-secundario" href="{{exame.resultado.url}}">Ver exame</a></td>
+                        {% else %}
+                            <td>Em análise</td>
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+            {% endfor %}
            
            
         </table>
